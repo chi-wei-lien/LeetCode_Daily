@@ -11,4 +11,5 @@ var removeDuplicates = function(nums) {
         }
         prev = nums[i];
     }
+    return nums.length;
 };
