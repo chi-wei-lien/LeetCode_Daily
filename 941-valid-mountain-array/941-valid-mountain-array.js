@@ -3,31 +3,17 @@
  * @return {boolean}
  */
 var validMountainArray = function(arr) {
-    let containInc = false;
-    let containDec = false;
-    let beforePeak = true;
-    for (let i = 1; i < arr.length; i++) {
-        if (beforePeak) {
-            if (arr[i] > arr[i - 1]) {
-                containInc = true;
-            }
-            else if (arr[i] === arr[i - 1]) {
-                return false;
-            }
-            else {
-                beforePeak = false;
-                containDec = true;
-            }
-        }
-        else {
-            if ((arr[i] > arr[i - 1]) || (arr[i] === arr[i - 1])) {
-                return false;
-            }
-        }
-        
+    let i = 0;
+    let n = arr.length;
+
+    while ((i < n - 1) && (arr[i] < arr[i + 1])) {
+        i++;
     }
-    if (containInc && containDec) {
-        return true;
+    if ((i === 0) || (i === n - 1) || (arr[i] === arr[i + 1])) {
+        return false
     }
-    return false;
+    while ((i < n - 1) && (arr[i] > arr[i + 1])) {
+        i++;
+    }
+    return i === n - 1;
 };
