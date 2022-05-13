@@ -11,21 +11,46 @@
  * @return {ListNode}
  */
 var addTwoNumbers = function(l1, l2) {
-    return recursiveFunc(l1, l2, 0) 
-};
-
-var recursiveFunc = function(l1, l2, carry) {
-    if (!l1 && !l2 && (carry === 0)) return null;
-    let sum = carry;
-    if (l1) {
-        sum += l1.val; 
+    if (!l1) return l2;
+    if (!l2) return l1;
+    if (!l1 && !l2) return null;
+    
+    let dummyHead = new ListNode(-1, null);
+    let dummy = dummyHead;
+    let sum = 0;
+    let carry = 0;
+    
+    while (l1 && l2) {
+        sum = l1.val + l2.val + carry;
+        carry = (sum >= 10) ? 1 : 0;
+        sum %= 10;
+        dummy.next = new ListNode(sum, null);
         l1 = l1.next;
-    }
-    if (l2) {
-        sum += l2.val;
         l2 = l2.next;
+        dummy = dummy.next;
     }
-    carry = (sum >= 10) ? 1 : 0;
-    let node = new ListNode(sum % 10, recursiveFunc(l1, l2, carry));
-    return node;
-}
+    
+    while (l1) {
+        sum = l1.val + carry;
+        carry = (sum >= 10) ? 1 : 0;
+        sum %= 10;
+        dummy.next = new ListNode(sum, null);
+        l1 = l1.next;
+        dummy = dummy.next;
+    }
+    
+    while (l2) {
+        sum = l2.val + carry;
+        carry = (sum >= 10) ? 1 : 0;
+        sum %= 10;
+        dummy.next = new ListNode(sum, null);
+        l2 = l2.next;
+        dummy = dummy.next;
+    }
+    
+    if (carry === 1) {
+        dummy.next = new ListNode(1, null);
+    }
+    
+    return dummyHead.next;
+};
