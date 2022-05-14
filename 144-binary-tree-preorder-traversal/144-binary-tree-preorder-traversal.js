@@ -10,17 +10,17 @@
  * @param {TreeNode} root
  * @return {number[]}
  */
-let number = [];
 
 var preorderTraversal = function(root) {
-    number = [];
-    recursiveFunc(root);
-    return number;
+    return recursiveFunc(root);
 };
 
 var recursiveFunc = function(root) {
-    if (!root) return null;
+    let number = [];
+    if (!root) return number;
+    
     number.push(root.val);
-    recursiveFunc(root.left);
-    recursiveFunc(root.right);
+    number = number.concat(recursiveFunc(root.left));
+    number = number.concat(recursiveFunc(root.right));
+    return number;
 }
