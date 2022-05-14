@@ -15,12 +15,11 @@ var preorderTraversal = function(root) {
     return recursiveFunc(root);
 };
 
-var recursiveFunc = function(root) {
-    let number = [];
-    if (!root) return number;
+var recursiveFunc = function(root, array = []) {
+    if (!root) return [];
     
-    number.push(root.val);
-    number.push(...recursiveFunc(root.left));
-    number.push(...recursiveFunc(root.right));
-    return number;
+    array.push(root.val);
+    recursiveFunc(root.left, array);
+    recursiveFunc(root.right, array);
+    return array;
 }
