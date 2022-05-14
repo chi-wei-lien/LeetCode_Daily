@@ -20,7 +20,7 @@ var recursiveFunc = function(root) {
     if (!root) return number;
     
     number.push(root.val);
-    number = number.concat(recursiveFunc(root.left));
-    number = number.concat(recursiveFunc(root.right));
+    number.push(...recursiveFunc(root.left));
+    number.push(...recursiveFunc(root.right));
     return number;
 }
