@@ -4,13 +4,11 @@
  */
 var dailyTemperatures = function(temperatures) {
     let stack = [[temperatures[0], 0]];
-    let distance = 0;
     for (let i = 1; i < temperatures.length; i++) {
         for (let j = stack.length - 1; j >= 0; j--) {
             if (stack[stack.length - 1][0] < temperatures[i]) {
                 temperatures[stack[stack.length - 1][1]] = i - stack[stack.length - 1][1];
                 stack.pop();
-                distance--;
                 continue;
             }
             break;
