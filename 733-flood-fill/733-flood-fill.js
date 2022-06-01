@@ -13,18 +13,20 @@ var floodFill = function(image, sr, sc, newColor) {
     }
     while (stack.length) {
         let curr = stack.pop();
-        if (curr[0] >= image.length || curr[1] >= image[0].length || curr[0] < 0 || curr[1] < 0) {
+        let row = curr[0];
+        let col = curr[1]
+        if (row >= image.length || col >= image[0].length || row < 0 || col < 0) {
             continue;
         }
-        let currColor = image[curr[0]][curr[1]];
+        let currColor = image[row][col];
         if (currColor != originalColor) {
             continue;
         }
-        image[curr[0]][curr[1]] = newColor;
-        stack.push([curr[0] + 1, curr[1]]);
-        stack.push([curr[0], curr[1] + 1]);
-        stack.push([curr[0] - 1, curr[1]]);
-        stack.push([curr[0], curr[1] - 1]);
+        image[row][curr[1]] = newColor;
+        stack.push([row + 1, col]);
+        stack.push([row, col + 1]);
+        stack.push([row - 1, col]);
+        stack.push([row, col - 1]);
     }
     return image;
 };
