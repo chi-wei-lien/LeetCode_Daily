@@ -8,6 +8,9 @@
 var floodFill = function(image, sr, sc, newColor) {
     let queue = [[sr, sc]];
     let originalColor = image[sr][sc];
+    if (originalColor === newColor) {
+        return image;
+    }
     while (queue.length) {
         let queueLength = queue.length;
         for (let i = 0; i < queueLength; i++) {
@@ -20,18 +23,11 @@ var floodFill = function(image, sr, sc, newColor) {
                 continue;
             }
             console.log(curr);
-            image[curr[0]][curr[1]] = -1;
+            image[curr[0]][curr[1]] = newColor;
             queue.push([curr[0] + 1, curr[1]]);
             queue.push([curr[0], curr[1] + 1]);
             queue.push([curr[0] - 1, curr[1]]);
             queue.push([curr[0], curr[1] - 1]);
-        }
-    }
-    for (let i = 0; i < image.length; i++) {
-        for (let j = 0; j < image[0].length; j++) {
-            if (image[i][j] === -1) {
-                image[i][j] = newColor;
-            }
         }
     }
     return image;
