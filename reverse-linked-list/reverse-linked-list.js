@@ -10,27 +10,17 @@
  * @return {ListNode}
  */
 var reverseList = function(head) {
-    if (head === null) return null;
-    let cur = head;
-    let nextNextNode = null;
-    if (cur.next) {
-        nextNextNode = cur.next.next;
+    return recur(head, null);
+};
+
+var recur = function(head, tail) {
+    if (!head) return null;
+    let nextNode = head.next;
+    head.next = tail;
+    if (!nextNode) {
+        return head;
     }
     else {
-        return cur;
-    }
-    let nextNode = cur.next;
-    let tempCur = nextNode;
-    cur.next.next = cur;
-    cur.next = null;
-    cur = tempCur;
-    while (nextNextNode) { 
-        let tempNextNode = nextNextNode;
-        let tempNextNextNode = nextNextNode.next;
-        cur = nextNextNode;
-        nextNextNode.next = nextNode;
-        nextNextNode = tempNextNextNode;
-        nextNode = tempNextNode;
-    }
-    return cur;
-};
+        return recur(nextNode, head);
+    }   
+}
