@@ -12,22 +12,20 @@
  * @return {number}
  */
 var guessNumber = function(n) {
-    let start = 0;
-    let end = n;
-    
-    while(start<=end){
-        let mid = Math.floor((start+end)/2);
-        
-        let ans = guess(mid);
-        
-        if(ans===0){
+    let lpoint = 0;
+    let rpoint = n;
+    while (lpoint <= rpoint) {
+        let mid = Math.floor((rpoint + lpoint) / 2);
+        let result = guess(mid);
+        if (result === 0) {
             return mid;
         }
-        
-        if(ans===-1){
-            end = mid - 1;
-        } else {
-            start = mid+1;
+        if (result === -1) {
+            rpoint = mid - 1;
+        }
+        else {
+            lpoint = mid + 1;
         }
     }
+    return lpoint;
 };
