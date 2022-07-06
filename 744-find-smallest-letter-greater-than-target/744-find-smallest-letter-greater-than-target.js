@@ -7,13 +7,9 @@ var nextGreatestLetter = function(letters, target) {
     let left = 0
     let n = letters.length;
     let right = n;
-    target += 1;
     while (left < right) {
         let mid = left + Math.floor((right - left) / 2);
-        if (letters[mid] === target) {
-            return letters[mid];
-        }
-        else if (letters[mid] > target) {
+        if (letters[mid] > target) {
             right = mid;
         }
         else {
