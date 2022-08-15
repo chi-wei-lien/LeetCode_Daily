@@ -21,7 +21,7 @@ var recursive = function(nums, left, right) {
   }
   let mid = (left + right) / 2 | 0;
   let node = new TreeNode(nums[mid]);
-  if (left !== mid) node.left = recursive(nums, left, mid - 1);
+  node.left = recursive(nums, left, mid - 1);
   node.right = recursive(nums, mid + 1, right);
   return node;
 }
