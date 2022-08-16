@@ -15,6 +15,5 @@ var rob = function(nums) {
             nums[i] = nums[i - 1];
         }
     }
-    console.log(nums);
     return nums[nums.length - 1] > nums[nums.length - 2] ? nums[nums.length - 1] : nums[nums.length - 2];
 };
