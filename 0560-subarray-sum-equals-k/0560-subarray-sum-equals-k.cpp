@@ -7,22 +7,18 @@ using namespace std;
 class Solution {
 public:
     int subarraySum(vector<int>& nums, int k) {
-      int res = 0;
+      int sum, ans = 0;
       unordered_map<int, int> order;
-      vector<int> sum_nums;
-      sum_nums.push_back(nums[0]);
-      ++order[nums[0]];
-      for (int i = 1; i < nums.size(); i++)
-      {
-        sum_nums.push_back(nums[i] + sum_nums[i - 1]);
-        ++order[sum_nums[i]];
-      }
+      int overflow = 0;
+      ++order[sum];
+
       for (int i = 0; i < nums.size(); i++)
       {
-        res += order[k];
-        order[sum_nums[i]]--;
-        k += nums[i];
+        sum += nums[i];
+        overflow = sum - k;
+        ans += order[overflow];
+        ++order[sum];
       }
-      return res;
+      return ans;
     }
 };
